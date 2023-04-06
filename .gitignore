@@ -5,3 +5,4 @@ dist
 .env
 
 src/db/demo_db.db3
+src/db/test_db.db3

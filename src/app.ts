@@ -55,11 +55,11 @@ export default class App {
     this.app.use("/transactions", transactionController.router);
   }
 
+  public getApp(): Application {
+    return this.app;
+  }
+
   public start(): void {
-    const knex = new Database();
-
-    knex.makeMigrations();
-
     this.app.listen(this.port, (): void => {
       console.log(`[⚡]: server running on: `, this.port);
     });
