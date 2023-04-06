@@ -1,7 +1,6 @@
 import Database from "../db/database";
 import Account from "../models/account";
 import Transaction from "../models/transaction";
-import { TAccount } from "../types/types";
 import TransactionRepository from "./TransactionRepository";
 
 export default class AccountRepository extends Database {
@@ -100,7 +99,6 @@ export default class AccountRepository extends Database {
 
   async withdrawFunds(userId: string, amount: number): Promise<void> {
     const transactionRepository = new TransactionRepository();
-    const userBalance = await this.getCurrentBalance(userId);
 
     await this.connection<Account>("accounts")
       .where("user_id", userId)
