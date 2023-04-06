@@ -1,7 +1,5 @@
 import { Response } from "express";
 import { AuthMiddleware } from "../middlewares/AuthMiddleware";
-import AccountRepository from "../repositories/AccountRepository";
-import { UserRepository } from "../repositories/UserRepository";
 import AccountService from "../services/AccountService";
 import UserService from "../services/UserService";
 import { RequestWithPayload, ResponseObj } from "../types/types";
@@ -57,7 +55,6 @@ export default class UserController extends BaseController {
     req: RequestWithPayload,
     res: Response<ResponseObj>
   ): Promise<void> {
-    console.log(this);
     const { amount } = req.body;
 
     const foundUser = await this.userService.findUser(req.userId!);
