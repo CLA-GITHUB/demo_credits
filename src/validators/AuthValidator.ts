@@ -39,7 +39,7 @@ export default class AuthValidator {
     }
 
     if (!password) {
-      errors.push("password is requried");
+      errors.push("password is required");
     }
 
     return errors;
