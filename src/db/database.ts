@@ -6,6 +6,7 @@ export default class Database {
 
   constructor() {
     this.connection = knex(config[process.env.NODE_ENV!]);
+    this.makeMigrations();
   }
 
   async close() {
@@ -13,18 +14,12 @@ export default class Database {
   }
 
   async makeMigrations() {
-    // await this.connection.migrate.latest({
-    //   directory: "./src/db/migrations",
-    // });
-    // await this.connection.migrate.up();
-    console.log("made migrations");
+    await this.connection.migrate.latest();
   }
 
   async dropAllTables() {
     this.connection.schema.dropTableIfExists("users");
     this.connection.schema.dropTableIfExists("accounts");
     this.connection.schema.dropTableIfExists("transactions");
-
-    console.log("all tables dropped");
   }
 }
