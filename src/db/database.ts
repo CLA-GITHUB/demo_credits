@@ -6,7 +6,6 @@ export default class Database {
 
   constructor() {
     this.connection = knex(config[process.env.NODE_ENV!]);
-    this.makeMigrations();
   }
 
   async close() {
