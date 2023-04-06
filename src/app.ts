@@ -52,7 +52,7 @@ export default class App {
     this.app.use("/auth", authController.router);
     this.app.use("/user", userController.router);
     this.app.use("/account", accountController.router);
-    this.app.use("/transaction", transactionController.router);
+    this.app.use("/transactions", transactionController.router);
   }
 
   public start(): void {

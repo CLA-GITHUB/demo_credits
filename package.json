@@ -10,7 +10,8 @@
     "watch": "npx tsc --watch",
     "dev": "nodemon ./dist/server.js",
     "knex:migrate:make": "knex --knexfile src/db/knexfile.ts migrate:make",
-    "knex:migrate:latest": "knex --knexfile src/db/knexfile.ts migrate:latest"
+    "knex:migrate:latest": "knex --knexfile src/db/knexfile.ts migrate:latest --env production",
+    "knex:migrate:down": "knex --knexfile src/db/knexfile.ts migrate:down --env production"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",

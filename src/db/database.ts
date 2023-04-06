@@ -13,10 +13,10 @@ export default class Database {
   }
 
   async makeMigrations() {
-    await this.connection.migrate.latest({
-      directory: "./src/db/migrations",
-    });
-    await this.connection.migrate.up();
+    // await this.connection.migrate.latest({
+    //   directory: "./src/db/migrations",
+    // });
+    // await this.connection.migrate.up();
     console.log("made migrations");
   }
 

@@ -16,7 +16,7 @@ const config: { [key: string]: Knex.Config } = {
       filename: process.env.DEV_DB_PATH!,
     },
     migrations: {
-      directory: "./src/db/migrations",
+      directory: ".src/db/migrations",
     },
     useNullAsDefault: true,
   },
@@ -24,15 +24,15 @@ const config: { [key: string]: Knex.Config } = {
   production: {
     client: "mysql2",
     connection: {
-      host: process.env.HOST,
-      user: process.env.USER,
-      password: process.env.PASSWORD,
-      database: process.env.DATABASE,
-      port: process.env.DB_PORT as unknown as number,
+      host: process.env.HOST || "containers-us-west-118.railway.app",
+      user: process.env.USER || "root",
+      password: process.env.PASSWORD || "yihB7QpuNzRf7rU2vZh6",
+      database: process.env.DATABASE || "railway",
+      port: (process.env.DB_PORT as unknown as number) || 5476,
     },
     migrations: {
       tableName: "knex_migrations",
-      directory: "./src/db/migrations",
+      directory: "./migrations",
       extension: extension,
       loadExtensions: [`.${extension}`],
     },
