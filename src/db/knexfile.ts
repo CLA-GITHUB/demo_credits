@@ -4,6 +4,11 @@ import dotenv from "dotenv";
 dotenv.config();
 // Update with your config settings.
 
+const extension =
+  process.env.NODE_ENV === "production" || process.env.NODE_ENV === "staging"
+    ? "js"
+    : "ts";
+
 const config: { [key: string]: Knex.Config } = {
   development: {
     client: "sqlite3",
@@ -28,6 +33,8 @@ const config: { [key: string]: Knex.Config } = {
     migrations: {
       tableName: "knex_migrations",
       directory: "./src/db/migrations",
+      extension: extension,
+      loadExtensions: [`.${extension}`],
     },
     debug: true,
     useNullAsDefault: true,
