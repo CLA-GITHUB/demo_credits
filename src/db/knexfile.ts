@@ -6,25 +6,26 @@ const config: { [key: string]: Knex.Config } = {
   development: {
     client: "sqlite3",
     connection: {
-      filename: `C:\\Users\\USER\\Desktop\\dev stuff\\Node\\be_tasks\\demo_credit\\src\\db\\demo_db.db3`,
+      filename: process.env.DEV_DB_PATH!,
     },
     useNullAsDefault: true,
   },
 
   production: {
-    client: "postgresql",
+    client: "mysql2",
     connection: {
-      database: "my_db",
-      user: "username",
-      password: "password",
-    },
-    pool: {
-      min: 2,
-      max: 10,
+      host: process.env.HOST,
+      user: process.env.USER,
+      password: process.env.PASSWORD,
+      database: process.env.DATABASE,
+      port: process.env.DB_PORT as unknown as number,
     },
     migrations: {
       tableName: "knex_migrations",
+      directory: "./migrations",
     },
+    debug: true,
+    useNullAsDefault: true,
   },
 };
 export default config;
