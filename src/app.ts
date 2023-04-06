@@ -56,8 +56,10 @@ export default class App {
   }
 
   public start(): void {
-    // const knex = new Database();
-    // knex.dropAllTables();
+    const knex = new Database();
+
+    knex.makeMigrations();
+
     this.app.listen(this.port, (): void => {
       console.log(`[⚡]: server running on: `, this.port);
     });

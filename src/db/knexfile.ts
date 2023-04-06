@@ -1,5 +1,7 @@
 import type { Knex } from "knex";
+import dotenv from "dotenv";
 
+dotenv.config();
 // Update with your config settings.
 
 const config: { [key: string]: Knex.Config } = {
@@ -7,6 +9,9 @@ const config: { [key: string]: Knex.Config } = {
     client: "sqlite3",
     connection: {
       filename: process.env.DEV_DB_PATH!,
+    },
+    migrations: {
+      directory: "./src/db/migrations",
     },
     useNullAsDefault: true,
   },
@@ -22,7 +27,7 @@ const config: { [key: string]: Knex.Config } = {
     },
     migrations: {
       tableName: "knex_migrations",
-      directory: "./migrations",
+      directory: "./src/db/migrations",
     },
     debug: true,
     useNullAsDefault: true,

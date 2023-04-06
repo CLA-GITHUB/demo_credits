@@ -12,6 +12,11 @@ export default class Database {
     await this.connection.destroy();
   }
 
+  async makeMigrations() {
+    await this.connection.migrate.latest();
+    console.log("made migrations");
+  }
+
   async dropAllTables() {
     this.connection.schema.dropTableIfExists("users");
     this.connection.schema.dropTableIfExists("accounts");
