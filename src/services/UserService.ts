@@ -10,8 +10,8 @@ export default class UserService {
   }
 
   async createUser(user: TUser): Promise<User | null> {
-    const newUser = await this.userRepository.create(user);
-
+    await this.userRepository.create(user);
+    const newUser = await this.userRepository.getUser(user.email);
     return newUser;
   }
 }

@@ -39,21 +39,23 @@ export default class AccountRepository extends Database {
     // get the current balance
     const currentBalance = await this.getCurrentBalance(userId);
 
-    await this.connection.transaction(async (trx) => {
-      //increment the balance
-      trx("accounts")
-        .where("user_id", userId)
-        .update({ balance: currentBalance + amount })
-        .then(async () => {
-          const transaction = new Transaction({
-            receiver: userId,
-            amount,
-            type: "deposit",
-          });
-          //creates transaction
-          await transactionRepository.create(transaction);
-        });
+    const transactionProvider = this.connection.transactionProvider();
+    const transaction = await transactionProvider();
+
+    await transaction<Account>("accounts")
+      .where("user_id", userId)
+      .update({
+        balance: currentBalance + amount,
+      });
+
+    await transaction<Transaction>("transactions").insert({
+      receiver: userId,
+      sender: "",
+      amount,
+      type: "deposit",
     });
+
+    await transaction.commit();
 
     return;
   }

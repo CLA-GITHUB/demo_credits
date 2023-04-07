@@ -42,15 +42,15 @@ C:/Users/TL/Desktop/dev_stuff/demo_credit/src/db/dev.db3
   production: {
     client: "mysql2",
     connection: {
-      host: process.env.HOST,
-      user: process.env.USER,
-      password: process.env.PASSWORD,
-      database: process.env.DATABASE,
-      port: process.env.DB_PORT as unknown as number,
+      host: process.env.HOST || "containers-us-west-175.railway.app",
+      user: process.env.USER || "root",
+      password: process.env.PASSWORD || "hi4bK3Bdnjn6s3zsOXIV",
+      database: process.env.DATABASE || "railway",
+      port: (process.env.DB_PORT as unknown as number) || 7349,
     },
     migrations: {
       tableName: "knex_migrations",
-      directory: "./migrations",
+      directory: "./src/db/migrations",
       extension: extension,
       loadExtensions: [`.${extension}`],
     },

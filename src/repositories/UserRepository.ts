@@ -15,11 +15,7 @@ export class UserRepository extends Database {
     return users[0];
   }
 
-  async create(user: TUser): Promise<User | null> {
-    const createdUser = await this.connection<User>("users").insert(user, "*");
-    if (!createdUser) {
-      return null;
-    }
-    return createdUser[0];
+  async create(user: TUser): Promise<void> {
+    await this.connection<User>("users").insert(user);
   }
 }

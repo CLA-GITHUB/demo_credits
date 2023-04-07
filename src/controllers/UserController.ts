@@ -5,6 +5,7 @@ import UserService from "../services/UserService";
 import { RequestWithPayload, ResponseObj } from "../types/types";
 import TransactionValidator from "../validators/TransactionValidator";
 import BaseController from "./BaseController";
+import Account from "../models/account";
 
 export default class UserController extends BaseController {
   constructor(
@@ -38,6 +39,11 @@ export default class UserController extends BaseController {
     }
 
     const foundAccount = await this.accountService.findAccount(foundUser?.id!);
+    if (!foundAccount) {
+      await this.accountService.createAccount(
+        new Account(undefined, foundUser.id)
+      );
+    }
 
     //remove password form foundUser
     foundUser.password = "";
