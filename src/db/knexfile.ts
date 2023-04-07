@@ -2,6 +2,7 @@ import type { Knex } from "knex";
 import dotenv from "dotenv";
 
 dotenv.config({ path: "../../.env" });
+const { DEV_DB_PATH, DEV_DB_PATH_TEST, NODE_ENV } = process.env;
 // Update with your config settings.
 
 const extension =
@@ -14,11 +15,14 @@ const config: { [key: string]: Knex.Config } = {
     client: "sqlite3",
     connection: {
       filename:
-        process.env.DEV_DB_PATH ||
-        "C:\\Users\\USER\\Desktop\\dev stuff\\Node\\be_tasks\\demo_credit\\src\\db\\demo_db.db3",
+        DEV_DB_PATH! ||
+        `
+C:/Users/TL/Desktop/dev_stuff/demo_credit/src/db/dev.db3
+      `,
     },
     migrations: {
-      directory: "./src/db/migrations",
+      directory:
+        NODE_ENV == "production" ? "./src/db/migrations" : "./migrations",
     },
     useNullAsDefault: true,
   },
@@ -26,12 +30,11 @@ const config: { [key: string]: Knex.Config } = {
   test: {
     client: "sqlite3",
     connection: {
-      filename:
-        process.env.DEV_DB_PATH_TEST! ||
-        "C:\\Users\\USER\\Desktop\\dev stuff\\Node\\be_tasks\\demo_credit\\src\\db\\test_db.db3",
+      filename: DEV_DB_PATH_TEST!,
     },
     migrations: {
-      directory: "./src/db/migrations",
+      directory:
+        NODE_ENV == "production" ? "./src/db/migrations" : "./migrations",
     },
     useNullAsDefault: true,
   },
@@ -47,7 +50,7 @@ const config: { [key: string]: Knex.Config } = {
     },
     migrations: {
       tableName: "knex_migrations",
-      directory: "./src/db/migrations",
+      directory: "./migrations",
       extension: extension,
       loadExtensions: [`.${extension}`],
     },

@@ -12,7 +12,6 @@ import { TransactionService } from "./services/TransactionService";
 import { UserRepository } from "./repositories/UserRepository";
 import TransactionRepository from "./repositories/TransactionRepository";
 import TransactionController from "./controllers/TransactionController";
-import Database from "./db/database";
 dotenv.config();
 
 export default class App {
